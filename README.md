@@ -22,6 +22,19 @@ The procedure of adding MemGuard module is
                1. make
                2. insmod memguard.ko
 
+
 3. Building MBProtector tool
+
+A. Goto MBProtector/src/pin-2.14-71313-gcc.4.4.7-linux/source/tools directory
+B. Copy "MyPinTool" directory and save it as "Profiling" directory
+C. Copy Profiling.cpp to Profiling directory
+D. Open makefile.rules and modify "TEST_TOOL_ROOTS := MyPinTool" to TEST_TOOL_ROOTS := Profiling
+E. Go to Profiling directory and run this command - make obj-intel64/Profiling.so
+
+
+4. Running the tool
+
+Run this command from Profiling directory - "../../../pin -t obj-intel64/Profiling.so -- Path to your application"
+
 
 
