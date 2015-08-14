@@ -55,9 +55,18 @@ E. Go to MBProtector directory and run this command - make obj-intel64/MBProtect
 4. Running the tool
 
 A. Running Profiling tool
+
+1. Go to Profiling directory and give following command to terminal
+
+"../../../pin -t obj-intel64/Profiling.so -- path_to_your_application"
+
+
+
 B. Running MBProtector tool
 
-Run this command from Profiling directory - "../../../pin -t obj-intel64/Profiling.so -- path_to_your_application"
+1. Go to MBProtector directory 
+2. Copy bwlock.h in current directory
+3. Run this command from current directory - "../../../pin -t obj-intel64/MBProtector.so -- path_to_your_application"
 
 
-
+Details of building and running of any pin tool is given in Pin website - https://software.intel.com/sites/landingpage/pintool/docs/71313/Pin/html/
