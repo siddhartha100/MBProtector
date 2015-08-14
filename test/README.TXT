@@ -1,0 +1,34 @@
+This documents will tell you the process of using BWProtector using a test program step by step
+
+
+
+1. Compile TestProgram.cpp 
+
+$ cc TestProgram.cpp -o TestProgram 
+
+Assume that TestProgram binary is located in this path - /home/TestProgram
+
+
+
+2. generate profiling information of TestProgram using profiling part of MBprotector tool
+
+$  ../../../pin -t obj-intel64/Profiling.so -- /home/TestProgram
+
+It will generate function wise profiling of TestProgram in a file called proccount.out. Sample output would be 
+
+Procedure      Image            Address          Calls  Instructions  Memory_Instructions Percentage_of_memory_instructions
+main            bash             41bd50            1          521          275           52
+.plt            bash             41af80           64        21505        21505          100
+
+
+
+3. From the output of proccount.out, identify functions you want to protect from memory interference
+
+
+
+4. Run the MBProtector part of the tool to protect those functions
+
+$  ../../../pin -t obj-intel64/MBProtector.so -- /home/TestProgram
+
+
+
