@@ -4,8 +4,10 @@ This tool is able to protect memory critical sections on any program. It modifie
 the program binary in order for that.
 
 
-
 Building and running the tool: 
+
+
+
 
 
 1. Installing correct linux kernel
@@ -17,30 +19,54 @@ that kernel from Github.Command is - git clone https://github.com/heechul/linux 
 During installation, you need to select BWLOCK option in configuration file.
 
 
+
+
+
 2. Installing MemGuard 
 
-You need to install MemGuard module in Linux. Download MemGuard module from GitHub.
+You need to install MemGuard module in previously installed Linux kernel. Download MemGuard 
+module from GitHub.
 
 Commands are - 1. git clone https://github.com/heechul/memguard.git
                2. git checkout rtas15-bwlockv2
+                
+The procedure of building and installing MemGuard module are
+               1. Goto memguard directory 
+               2. Build it using "make" command
+               3. Install MemGuard using "insmod memguard.ko" command
 
-The procedure of adding MemGuard module is 
-               1. make
-               2. insmod memguard.ko
 
 
-3. Building MBProtector tool
+
+
+3. Building the tool( Procedure of builing the tool is same for profiling and MBProtector - Replace "MBProtector" with "Profiling" when building Profiling tool)
 
 A. Goto MBProtector/src/pin-2.14-71313-gcc.4.4.7-linux/source/tools directory
-B. Copy "MyPinTool" directory and save it as "Profiling" directory
-C. Copy Profiling.cpp to Profiling directory
-D. Open makefile.rules and modify "TEST_TOOL_ROOTS := MyPinTool" to TEST_TOOL_ROOTS := Profiling
-E. Go to Profiling directory and run this command - make obj-intel64/Profiling.so
+B. Copy "MyPinTool" directory and save it as "MBProtector" directory
+C. Copy MBProtector.cpp from  to MBProtector directory
+D. Copy bwlock.h file to MBProtector directory
+D. Open makefile.rules and modify "TEST_TOOL_ROOTS := MyPinTool" to TEST_TOOL_ROOTS := MBProtector
+E. Go to MBProtector directory and run this command - make obj-intel64/MBProtector.so
+
+
+
 
 
 4. Running the tool
 
-Run this command from Profiling directory - "../../../pin -t obj-intel64/Profiling.so -- Path to your application"
+A. Running Profiling tool
+
+1. Go to Profiling directory and give following command to terminal
+
+"../../../pin -t obj-intel64/Profiling.so -- path_to_your_application"
 
 
 
+B. Running MBProtector tool
+
+1. Go to MBProtector directory 
+2. Copy bwlock.h in current directory
+3. Run this command from current directory - "../../../pin -t obj-intel64/MBProtector.so -- path_to_your_application"
+
+
+Details of building and running of any pin tool is given in Pin website - https://software.intel.com/sites/landingpage/pintool/docs/71313/Pin/html/
